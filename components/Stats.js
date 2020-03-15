@@ -10,7 +10,6 @@ const StatBlock = styled.div`
   background: #f2f2f2;
   font-size: 2rem;
   padding: 2rem;
-  border-radius: 2rem;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -22,19 +21,30 @@ export default function Stats({ url }) {
   console.log(stats, loading, error);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
+
+  const getPercentRecovered = () => { 
+    return Math.floor(
+      (parseInt(stats.total_recovered.replace(/,/g, "")) /
+        (parseInt(stats.total_cases.replace(/,/g, "")) - parseInt(stats.total_deaths.replace(/,/g, "")))) *
+        100
+    );
+  }
   return (
     <StatGrid>
       <StatBlock>
         <h3>Confirmed:</h3>
-        <span>{stats.confirmed.value}</span>
+        <span>{stats.total_cases}</span>
+        <span style={{ color: "darkgray" }}>+{stats.new_cases}</span>
       </StatBlock>
       <StatBlock>
         <h3>Deaths:</h3>
-        <span>{stats.deaths.value}</span>
+        <span>{stats.total_deaths}</span>
+        <span style={{ color: "red" }}>+{stats.new_deaths}</span>
       </StatBlock>
       <StatBlock>
         <h3>Recovered:</h3>
-        <span>{stats.recovered.value}</span>
+        <span>{stats.total_recovered}</span>
+        <span style={{ color: "green" }}>{getPercentRecovered()}%</span>
       </StatBlock>
     </StatGrid>
   );
