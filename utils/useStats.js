@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const options = {
+export const basicOptions = {
   "method": "GET",
   "headers": {
     "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
@@ -8,16 +8,22 @@ const options = {
   }
 }
 
-export default function useStats(url) {
+export const corsOptions = {
+  method: "GET",
+  mode: "cors",
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  }
+};
+
+const useStats = (url, options) => {
   const [stats, setStats] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   useEffect(() => {
-    console.log('Mounting or updating');
     async function fetchData() {
       setLoading(true);
       setError();
-      console.log('Fetching Data');
       const data = await fetch(url, options)
         .then(res => res.json())
         .catch(err => {
@@ -34,3 +40,5 @@ export default function useStats(url) {
     error,
   };
 }
+
+export default useStats; 
