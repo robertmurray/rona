@@ -1,93 +1,109 @@
 import styled from "styled-components";
-import useStats from "../utils/useStats";
+import useStats, { basicOptions } from "../utils/useStats";
 
 const CountryGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-gap: 0.15rem;
 `;
 const HeaderBlock = styled.div`
-  background: #f2f2f2;
-  font-size: 1rem;
-  padding: 0.1rem;
+  background: #141414;
+  font-size: 1.2rem;
+  padding: 0.6rem;
   display: grid;
   align-items: center;
   justify-items: center;
   text-align: center;
+  font-weight: bold;
 `;
 const DataCell = styled.div`
-  background: #f3f3f3; 
-  padding: 0.5rem; 
-  display: grid; 
-  align-items: center; 
-  justify-items: center; 
-  text-align: center; 
+  background: #141414;
+  padding: 0.5rem;
+  display: grid;
+  align-items: center;
+  justify-items: right;
+  text-align: center;
+  font-weight: bold;
 `;
 
+const CountryCell = styled(DataCell)`
+  justify-items: left; 
+`
+
 const DeathCell = styled(DataCell)`
-  background: ${props => props.isOn ? "red" : '#f2f2f2'}; 
-  color: #f3f3f3; 
+  background: ${props => (props.isOn ? "red" : "#141414")};
+  color: #f3f3f3;
 `;
 
 const NewCasesCell = styled(DataCell)`
-  background: ${props => props.isOn ? "beige" : '#f2f2f2'}; 
+  background: ${props => (props.isOn ? "beige" : "#141414")};
+  color: #141414;
+`;
+
+const IncreaseCell = styled(DataCell)`
+  background: ${props => (props.isOn ? "lightpink" : "#141414")};
+  color: ${props => (props.isOn ? "#141414" : "#f3f3f3")}
 `;
 
 const percentIncrease = (country) => { 
-  return `(${Math.floor(
+  return Math.floor(
     (parseInt(country.new_cases.replace(/,/g, "")) / parseInt(country.cases.replace(/,/g, ""))) * 100
-  )}%)`;
+  );
 }
 
 const CountryBlock = ({ country }) => { 
+  const isOn = (newItems) => parseInt(newItems) > 0; 
   return (
     <>
-      <DataCell>{country.country_name}</DataCell>
+      <CountryCell>{country.country_name}</CountryCell>
       <DataCell>{country.cases}</DataCell>
-      <NewCasesCell isOn={parseInt(country.new_cases) > 0 }>
-        {parseInt(country.new_cases) > 0 ? `+${country.new_cases} ${percentIncrease(country)}` : ""}
+      <NewCasesCell isOn={isOn(country.new_cases)}>
+        {parseInt(country.new_cases) > 0 ? `+${country.new_cases}` : ""}
       </NewCasesCell>
+      <IncreaseCell isOn={percentIncrease(country) >= 15}>
+        {parseInt(country.new_cases) > 0 ? `+${percentIncrease(country)}%` : ""}
+      </IncreaseCell>
       <DataCell>{country.deaths}</DataCell>
-      <DeathCell isOn={parseInt(country.new_deaths) > 0}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell>
+      <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell>
       <DataCell>{country.total_recovered}</DataCell>
-      <DataCell>
-        {country.serious_critical} / {country.region}
-      </DataCell>
+      <DataCell>{country.serious_critical}</DataCell>
     </>
   );
 }
 
  const CountryList = ({ url })  => {
-  const { stats, loading, error } = useStats(url);
-  console.log(stats, loading, error);
+  const { stats, loading, error } = useStats(url, basicOptions);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
    
-   const getCountries = () => { 
+  const getCountries = () => { 
      return stats.countries_stat.map((country, idx) => <CountryBlock key={ idx } country={ country } /> ); 
   }
   return (
     <CountryGrid>
       <HeaderBlock>
-        <h5>Country</h5>
+        Country
       </HeaderBlock>
       <HeaderBlock>
-        <h5>Cases</h5>
-      </HeaderBlock>
-            <HeaderBlock>
-        <h5>New Cases</h5>
+        Cases
       </HeaderBlock>
       <HeaderBlock>
-        <h5>Deaths</h5>
-      </HeaderBlock>
-            <HeaderBlock>
-        <h5>New Deaths</h5>
+        New Cases
       </HeaderBlock>
       <HeaderBlock>
-        <h5>Recovered</h5>
+        Increase
       </HeaderBlock>
       <HeaderBlock>
-        <h5>Active / Serious</h5>
+        Deaths
+      </HeaderBlock>
+      <HeaderBlock>
+        New Deaths
+      </HeaderBlock>
+      <HeaderBlock>
+        Recovered
+      </HeaderBlock>
+      <HeaderBlock>
+        Active
       </HeaderBlock>
       {getCountries()}
     </CountryGrid>
