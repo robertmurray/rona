@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useStats from '../utils/useStats';
+import useStats, { basicOptions } from '../utils/useStats';
 
 const StatGrid = styled.div`
   display: grid;
@@ -7,7 +7,9 @@ const StatGrid = styled.div`
   grid-gap: 1rem;
 `;
 const StatBlock = styled.div`
-  background: #f2f2f2;
+  background: #141414;
+  background: linear-gradient(140deg, rgba(34, 33, 54, 1) 0%, rgba(9, 9, 121, 1) 47%);
+  border-radius: 1rem;
   font-size: 2rem;
   padding: 2rem;
   display: grid;
@@ -16,9 +18,8 @@ const StatBlock = styled.div`
   text-align: center;
 `;
 
-export default function Stats({ url }) {
-  const { stats, loading, error } = useStats(url);
-  console.log(stats, loading, error);
+const Stats = ({ url }) => {
+  const { stats, loading, error } = useStats(url, basicOptions);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
 
@@ -49,3 +50,5 @@ export default function Stats({ url }) {
     </StatGrid>
   );
 }
+
+export default Stats; 
