@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import useStats, { basicOptions } from '../utils/useStats';
+import COLORS from "../styles/colors"; 
 
 const StatGrid = styled.div`
   display: grid;
@@ -7,15 +8,27 @@ const StatGrid = styled.div`
   grid-gap: 1rem;
 `;
 const StatBlock = styled.div`
-  background: #141414;
-  background: linear-gradient(140deg, rgba(34, 33, 54, 1) 0%, rgba(9, 9, 121, 1) 47%);
-  border-radius: 1rem;
-  font-size: 2rem;
+  background: ${COLORS.gray};
+  background: linear-gradient(140deg, ${COLORS.gray} 0%, ${COLORS.mediumgray} 65%);
+  color: ${COLORS.darkteal};
+  font-size: 3rem;
   padding: 2rem;
   display: grid;
   align-items: center;
   justify-items: center;
   text-align: center;
+`;
+
+const DeathBlock = styled(StatBlock)`
+  background-color: ${COLORS.burgundy};
+  background-image: linear-gradient(135deg, ${COLORS.burgundy} 0%, ${COLORS.mediumburgundy} 65%);
+  color: ${COLORS.offwhite};
+`;
+
+const RecoveredBlock = styled(StatBlock)`
+  background-color: ${COLORS.mediumteal};
+  background-image: linear-gradient(135deg, ${COLORS.mediumteal} 0%, ${COLORS.teal} 65%);
+  color: ${COLORS.mediumgray};
 `;
 
 const Stats = ({ url }) => {
@@ -33,20 +46,20 @@ const Stats = ({ url }) => {
   return (
     <StatGrid>
       <StatBlock>
-        <h3>Confirmed:</h3>
+        <h6>Cases:</h6>
         <span>{stats.total_cases}</span>
-        <span style={{ color: "darkgray" }}>+{stats.new_cases}</span>
+        <span style={{ color: `${COLORS.teal}` }}>+{stats.new_cases}</span>
       </StatBlock>
-      <StatBlock>
-        <h3>Deaths:</h3>
+      <DeathBlock>
+        <h6>Deaths:</h6>
         <span>{stats.total_deaths}</span>
-        <span style={{ color: "red" }}>+{stats.new_deaths}</span>
-      </StatBlock>
-      <StatBlock>
-        <h3>Recovered:</h3>
+        <span style={{ color: `${COLORS.pink}`}}>+{stats.new_deaths}</span>
+      </DeathBlock>
+      <RecoveredBlock>
+        <h6>Recovered:</h6>
         <span>{stats.total_recovered}</span>
         <span style={{ color: "green" }}>{getPercentRecovered()}%</span>
-      </StatBlock>
+      </RecoveredBlock>
     </StatGrid>
   );
 }

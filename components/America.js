@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useStats from "../utils/useStats";
+import COLORS from "../styles/colors";
 
 const StatGrid = styled.div`
   display: grid;
@@ -7,15 +8,27 @@ const StatGrid = styled.div`
   grid-gap: 1rem;
 `;
 const StatBlock = styled.div`
-  background: #141414;
-  background: linear-gradient(140deg, rgba(34, 33, 54, 1) 0%, rgba(9, 9, 121, 1) 47%);
-  border-radius: 1rem;
-  font-size: 1rem;
+  background: ${COLORS.gray};
+  background: linear-gradient(140deg, ${COLORS.gray} 0%, ${COLORS.mediumgray} 65%);
+  color: ${COLORS.darkteal};
+  font-size: 2rem;
   padding: 1rem;
   display: grid;
   align-items: center;
   justify-items: center;
   text-align: center;
+`;
+
+const DeathBlock = styled(StatBlock)`
+  background-color: ${COLORS.burgundy};
+  background-image: linear-gradient(135deg, ${COLORS.burgundy} 0%, ${COLORS.mediumburgundy} 65%);
+  color: ${COLORS.offwhite};
+`;
+
+const RecoveredBlock = styled(StatBlock)`
+  background-color: ${COLORS.mediumteal};
+  background-image: linear-gradient(135deg, ${COLORS.mediumteal} 0%, ${COLORS.teal} 65%);
+  color: ${COLORS.mediumgray};
 `;
 
 const America = ({ url }) => {
@@ -33,17 +46,17 @@ const America = ({ url }) => {
   return (
     <StatGrid>
       <StatBlock>
-        <h3>Positive:</h3>
+        <p>Positive:</p>
         <span>{stats[0].positive}</span>
       </StatBlock>
-      <StatBlock>
-        <h3>Deaths:</h3>
+      <DeathBlock>
+        <p>Deaths:</p>
         <span>{stats[0].death}</span>
-      </StatBlock>
-      <StatBlock>
-        <h3>Tested:</h3>
+      </DeathBlock>
+      <RecoveredBlock>
+        <p>Tested:</p>
         <span>{stats[0].total}</span>
-      </StatBlock>
+      </RecoveredBlock>
     </StatGrid>
   );
 };

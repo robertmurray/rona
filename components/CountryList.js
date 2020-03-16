@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useStats, { basicOptions } from "../utils/useStats";
+import COLORS from "../styles/colors";
 
 const CountryGrid = styled.div`
   display: grid;
@@ -7,7 +8,8 @@ const CountryGrid = styled.div`
   grid-gap: 0.15rem;
 `;
 const HeaderBlock = styled.div`
-  background: #141414;
+  background: ${COLORS.darkteal};
+  color: ${COLORS.offwhite};
   font-size: 1.2rem;
   padding: 0.6rem;
   display: grid;
@@ -17,7 +19,8 @@ const HeaderBlock = styled.div`
   font-weight: bold;
 `;
 const DataCell = styled.div`
-  background: #141414;
+  background: ${COLORS.darkteal};
+  color: ${COLORS.mediumgray};
   padding: 0.5rem;
   display: grid;
   align-items: center;
@@ -31,18 +34,18 @@ const CountryCell = styled(DataCell)`
 `
 
 const DeathCell = styled(DataCell)`
-  background: ${props => (props.isOn ? "red" : "#141414")};
-  color: #f3f3f3;
+  background: ${props => (props.isOn ? COLORS.pink : COLORS.darkteal)};
+  color: ${COLORS.offwhite};
 `;
 
 const NewCasesCell = styled(DataCell)`
-  background: ${props => (props.isOn ? "beige" : "#141414")};
-  color: #141414;
+  background: ${props => (props.isOn ? COLORS.mediumgray : COLORS.darkteal)};
+  color: ${COLORS.darkteal};
 `;
 
 const IncreaseCell = styled(DataCell)`
-  background: ${props => (props.isOn ? "lightpink" : "#141414")};
-  color: ${props => (props.isOn ? "#141414" : "#f3f3f3")}
+  background: ${props => (props.isOn ? COLORS.burgundy : COLORS.darkteal)};
+  color: ${COLORS.mediumgray};
 `;
 
 const percentIncrease = (country) => { 

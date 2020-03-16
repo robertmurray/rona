@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import useStats, { basicOptions } from "../utils/useStats";
 import stateHash from "../lib/states";
+import COLORS from "../styles/colors";
 
 const StateGrid = styled.div`
   display: grid;
@@ -8,7 +9,8 @@ const StateGrid = styled.div`
   grid-gap: 0.15rem;
 `;
 const HeaderBlock = styled.div`
-  background: #141414;
+  background: ${COLORS.darkteal};
+  color: ${COLORS.offwhite};
   font-size: 1.2rem;
   padding: 0.6rem;
   display: grid;
@@ -18,7 +20,8 @@ const HeaderBlock = styled.div`
   font-weight: bold;
 `;
 const DataCell = styled.div`
-  background: #141414;
+  background: ${COLORS.darkteal};
+  color: ${COLORS.mediumgray};
   padding: 0.5rem;
   display: grid;
   align-items: center;
@@ -31,19 +34,20 @@ const StateCell = styled(DataCell)`
   justify-items: left;
 `;
 
+
 const DeathCell = styled(DataCell)`
-  background: ${props => (props.isOn ? "red" : "#141414")};
-  color: #f3f3f3;
+  background: ${props => (props.isOn ? COLORS.pink : COLORS.darkteal)};
+  color: ${COLORS.offwhite};
 `;
 
 const NewCasesCell = styled(DataCell)`
-  background: ${props => (props.isOn ? "beige" : "#141414")};
-  color: #141414;
+  background: ${props => (props.isOn ? COLORS.mediumgray : COLORS.darkteal)};
+  color: ${COLORS.darkteal};
 `;
 
 const IncreaseCell = styled(DataCell)`
-  background: ${props => (props.isOn ? "lightpink" : "#141414")};
-  color: ${props => (props.isOn ? "#141414" : "#f3f3f3")};
+  background: ${props => (props.isOn ? COLORS.burgundy : COLORS.darkteal)};
+  color: ${COLORS.mediumgray};
 `;
 
 // const percentIncrease = country => {
@@ -62,7 +66,7 @@ const StateBlock = ({ state }) => {
       {/* <IncreaseCell isOn={percentIncrease(country) >= 15}>
         {parseInt(country.new_cases) > 0 ? `+${percentIncrease(country)}%` : ""}
       </IncreaseCell> */}
-      <DataCell>{state.death}</DataCell>
+      <DeathCell>{state.death}</DeathCell>
       {/* <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell> */}
       <DataCell>{state.pending}</DataCell>
       <DataCell>{state.total}</DataCell>
