@@ -15,5 +15,10 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "styled-components": "^5.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2"
   }
 }
