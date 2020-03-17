@@ -1,10 +1,13 @@
 import styled from "styled-components";
+import { useState } from "react";
 import useStats, { basicOptions } from "../utils/useStats";
 import COLORS from "../styles/colors";
 
+import countries from "country-json/src/country-by-continent"; 
+
 const CountryGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-gap: 0.15rem;
 `;
 const HeaderBlock = styled.div`
@@ -54,11 +57,13 @@ const percentIncrease = (country) => {
   );
 }
 
+
 const CountryBlock = ({ country }) => { 
   const isOn = (newItems) => parseInt(newItems) > 0; 
   return (
     <>
       <CountryCell>{country.country_name}</CountryCell>
+      <CountryCell>{country.continent}</CountryCell>
       <DataCell>{country.cases}</DataCell>
       <NewCasesCell isOn={isOn(country.new_cases)}>
         {parseInt(country.new_cases) > 0 ? `+${country.new_cases}` : ""}
@@ -75,18 +80,29 @@ const CountryBlock = ({ country }) => {
 }
 
  const CountryList = ({ url })  => {
-  const { stats, loading, error } = useStats(url, basicOptions);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error...</p>;
+   const { stats, loading, error } = useStats(url, basicOptions);
+   const [continents, addContinents] = useState([]);
+   if (loading) return <p>Loading...</p>
+   if (error) return <p>Error...</p>;
+
+   const matchCountryToContinent = (country) => {
+     console.log(countries[0].country);
+     return stats.countries_stat.map((country, idx) => {
+       const countryByContentinent = countries.find(c => c.country === country.country_name); 
+       country.continent = countryByContentinent ? countryByContentinent.continent : null;
+       return country; 
+     })
+   }
    
   const getCountries = () => { 
-     return stats.countries_stat.map((country, idx) => <CountryBlock key={ idx } country={ country } /> ); 
+     return matchCountryToContinent().map((country, idx) => <CountryBlock key={ idx } country={ country } /> ); 
   }
   return (
     <CountryGrid>
       <HeaderBlock>
         Country
       </HeaderBlock>
+      <HeaderBlock>Continent</HeaderBlock>
       <HeaderBlock>
         Cases
       </HeaderBlock>
