@@ -59,38 +59,35 @@ const Stats = ({ url }) => {
   return (
     <StatGrid>
       <StatBlock>
-        <h6> Cases: </h6> <span> {stats.total_cases} </span>{" "}
+        <h6> Cases: </h6> <span> {stats.total_cases} </span>
         <span
           style={{
             color: `${COLORS.teal}`
           }}
         >
-          {" "}
-          +{stats.new_cases}{" "}
-        </span>{" "}
-      </StatBlock>{" "}
-      <DeathBlock>
-        <h6> Deaths: </h6> <span> {stats.total_deaths} </span>{" "}
-        <span
-          style={{
-            color: `${COLORS.pink}`
-          }}
-        >
-          {" "}
-          +{stats.new_deaths}{" "}
-        </span>{" "}
-      </DeathBlock>{" "}
+          +{stats.new_cases}
+        </span>
+      </StatBlock>
       <RecoveredBlock>
-        <h6> Recovered: </h6> <span> {stats.total_recovered} </span>{" "}
+        <h6> Recovered: </h6> <span> {stats.total_recovered} </span>
         <span
           style={{
             color: "green"
           }}
         >
-          {" "}
-          {getPercentRecovered()} %{" "}
-        </span>{" "}
-      </RecoveredBlock>{" "}
+          {getPercentRecovered()} %
+        </span>
+      </RecoveredBlock>
+      <DeathBlock>
+        <h6> Deaths: </h6> <span> {stats.total_deaths} </span>
+        <span
+          style={{
+            color: `${COLORS.pink}`
+          }}
+        >
+          +{stats.new_deaths}
+        </span>
+      </DeathBlock>
     </StatGrid>
   );
 };

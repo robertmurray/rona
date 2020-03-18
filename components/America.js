@@ -59,14 +59,14 @@ const America = ({ url }) => {
   return (
     <StatGrid>
       <StatBlock>
-        <p> Positive: </p> <span> {stats[0].positive} </span>{" "}
-      </StatBlock>{" "}
-      <DeathBlock>
-        <p> Deaths: </p> <span> {stats[0].death} </span>{" "}
-      </DeathBlock>{" "}
+        <p> Positive: </p> <span> {stats[0].positive} </span>
+      </StatBlock>
       <RecoveredBlock>
-        <p> Tested: </p> <span> {stats[0].total} </span>{" "}
-      </RecoveredBlock>{" "}
+        <p> Tested: </p> <span> {stats[0].total} </span>
+      </RecoveredBlock>
+      <DeathBlock>
+        <p> Deaths: </p> <span> {stats[0].death} </span>
+      </DeathBlock>
     </StatGrid>
   );
 };
