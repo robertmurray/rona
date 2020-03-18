@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
 import useStats, { basicOptions } from "../utils/useStats";
-import COLORS from "../styles/colors";
 
-import countries from "country-json/src/country-by-continent"; 
+import COLORS from "../styles/colors";
+import patchedCountries from "../utils/patchCountries"; 
+import matchCountryToContinent from "../utils/matchCountryToContinent"; 
 
 const CountryGrid = styled.div`
   display: grid;
@@ -57,6 +58,8 @@ const percentIncrease = (country) => {
   );
 }
 
+const countries = patchedCountries(); 
+
 
 const CountryBlock = ({ country }) => { 
   const isOn = (newItems) => parseInt(newItems) > 0; 
@@ -81,21 +84,11 @@ const CountryBlock = ({ country }) => {
 
  const CountryList = ({ url })  => {
    const { stats, loading, error } = useStats(url, basicOptions);
-   const [continents, addContinents] = useState([]);
    if (loading) return <p>Loading...</p>
    if (error) return <p>Error...</p>;
-
-   const matchCountryToContinent = (country) => {
-     console.log(countries[0].country);
-     return stats.countries_stat.map((country, idx) => {
-       const countryByContentinent = countries.find(c => c.country === country.country_name); 
-       country.continent = countryByContentinent ? countryByContentinent.continent : null;
-       return country; 
-     })
-   }
    
   const getCountries = () => { 
-     return matchCountryToContinent().map((country, idx) => <CountryBlock key={ idx } country={ country } /> ); 
+     return matchCountryToContinent(stats.countries_stat, countries).map((country, idx) => <CountryBlock key={ idx } country={ country } /> ); 
   }
   return (
     <CountryGrid>
