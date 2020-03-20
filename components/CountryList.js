@@ -5,61 +5,13 @@ import useStats, { basicOptions } from "../utils/useStats";
 import COLORS from "../styles/colors";
 import patchedCountries from "../utils/patchCountries"; 
 import matchCountryToContinent from "../utils/matchCountryToContinent"; 
+import percentIncrease from "../utils/percentIncrease"; 
 
-const CountryGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-gap: 0.15rem;
-`;
-const HeaderBlock = styled.div`
-  background: ${COLORS.darkteal};
-  color: ${COLORS.offwhite};
-  font-size: 1.2rem;
-  padding: 0.6rem;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  text-align: center;
-  font-weight: bold;
-`;
-const DataCell = styled.div`
-  background: ${COLORS.darkteal};
-  color: ${COLORS.mediumgray};
-  padding: 0.5rem;
-  display: grid;
-  align-items: center;
-  justify-items: right;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const CountryCell = styled(DataCell)`
-  justify-items: left; 
-`
-
-const DeathCell = styled(DataCell)`
-  background: ${props => (props.isOn ? COLORS.pink : COLORS.darkteal)};
-  color: ${COLORS.offwhite};
-`;
-
-const NewCasesCell = styled(DataCell)`
-  background: ${props => (props.isOn ? COLORS.mediumgray : COLORS.darkteal)};
-  color: ${COLORS.darkteal};
-`;
-
-const IncreaseCell = styled(DataCell)`
-  background: ${props => (props.isOn ? COLORS.burgundy : COLORS.darkteal)};
-  color: ${COLORS.mediumgray};
-`;
-
-const percentIncrease = (country) => { 
-  return Math.floor(
-    (parseInt(country.new_cases.replace(/,/g, "")) / parseInt(country.cases.replace(/,/g, ""))) * 100
-  );
-}
+import CountryGrid from "../components/base/CountryGrid";
+import HeaderBlock from "../components/base/HeaderBlock";
+import { DataCell, IncreaseCell, NewCasesCell, DeathCell, CountryCell } from "../components/base/DataCell";
 
 const countries = patchedCountries(); 
-
 
 const CountryBlock = ({ country }) => { 
   const isOn = (newItems) => parseInt(newItems) > 0; 
@@ -71,8 +23,10 @@ const CountryBlock = ({ country }) => {
       <NewCasesCell isOn={isOn(country.new_cases)}>
         {parseInt(country.new_cases) > 0 ? `+${country.new_cases}` : ""}
       </NewCasesCell>
-      <IncreaseCell isOn={percentIncrease(country) >= 15}>
-        {parseInt(country.new_cases) > 0 ? `+${percentIncrease(country)}%` : ""}
+      <IncreaseCell isOn={percentIncrease(country.new_cases.replace(/,/g, ""), country.cases.replace(/,/g, "")) >= 15}>
+        {parseInt(country.new_cases) > 0
+          ? `+${percentIncrease(country.new_cases.replace(/,/g, ""), country.cases.replace(/,/g, ""))}%`
+          : ""}
       </IncreaseCell>
       <DataCell>{country.deaths}</DataCell>
       <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell>
@@ -115,7 +69,7 @@ const CountryBlock = ({ country }) => {
         Recovered
       </HeaderBlock>
       <HeaderBlock>
-        Active
+        Serious
       </HeaderBlock>
       {getCountries()}
     </CountryGrid>

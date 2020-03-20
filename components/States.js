@@ -81,7 +81,6 @@ const StateList = ({ url }) => {
 
   const orderedStates = stats.sort((a, b) =>  a.positive < b.positive ? 1 : -1)
   const getStates = () => {
-    console.log("states: ", orderedStates)
     return orderedStates.map((state, idx) => <StateBlock key={idx} state={state} />);
   };
   return (

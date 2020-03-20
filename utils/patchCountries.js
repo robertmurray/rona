@@ -2,6 +2,7 @@ import countries from "country-json/src/country-by-continent";
 
 const patchCountries = () => {
   return [
+    { country: "Kazakhstan", continent: "Asia" },
     ...countries,
     { country: "S. Korea", continent: "Asia" },
     { country: "USA", continent: "North America" },
@@ -13,7 +14,6 @@ const patchCountries = () => {
     { country: "Taiwan", continent: "Asia" },
     { country: "Serbia", continent: "Europe" },
     { country: "Sri Lanka", continent: "Asia" },
-    { country: "Kazakhstan", continent: "Asia" },
     { country: "Réunion", continent: "Asia" },
     { country: "Channel Islands", continent: "Europe" },
     { country: "Curaçao", continent: "North America" },
@@ -22,7 +22,15 @@ const patchCountries = () => {
     { country: "U.S. Virgin Islands", continent: "North America" },
     { country: "CAR", continent: "Africa" },
     { country: "Vatican City", continent: "Europe" },
-    { country: "St. Vincent Grenadines", continent: "North America" }
+    { country: "St. Vincent Grenadines", continent: "North America" },
+    { country: "Faeroe Islands", continent: "South America" },
+    { country: "Eswatini", continent: "Africa" },
+    { country: "St. Barth", continent: "North America" },
+    { country: "Montenegro", continent: "Europe" }, 
+    { country: "Sint Maarten", continent: "North America" }, 
+    { country: "Fiji", continent: "Asia" },
+    { country: "Isle of Man", continent: "Europe" }, 
+    { country: "Cabo Verde", continent: "Africa"}
   ];
 };
 

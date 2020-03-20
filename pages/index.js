@@ -4,6 +4,7 @@ import Stats from "../components/Stats";
 import CountryList from "../components/CountryList";
 import America from "../components/America";
 import States from "../components/States";
+import Continents from "../components/Continents"; 
 
 const BASE_URL = "https://coronavirus-monitor.p.rapidapi.com/coronavirus/";
 const WORLD_URL = `${BASE_URL}worldstat.php`;
@@ -15,14 +16,16 @@ export default function IndexPage() {
   return (
     <div>
       <GlobalStyle />
-      <h1> COVID - 19 Dashboard </h1>
+      <h1>COVID - 19 Dashboard </h1>
       <Stats url={WORLD_URL}> </Stats>
-      <h2> US Cases </h2>
+      <h2>Continents</h2>
+      <Continents url={COUNTRIES_URL}></Continents>
+      <h2>US Cases </h2>
       <America url={US_URL}> </America>
+      <h2>Affected Countries </h2>
+      <CountryList url={COUNTRIES_URL}></CountryList>
       <h2> US States </h2>
       <States url={US_STATES_URL}> </States>
-      <h2> Affected Countries </h2>
-      <CountryList url={COUNTRIES_URL}></CountryList>
     </div>
   );
 }
