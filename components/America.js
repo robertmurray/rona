@@ -59,13 +59,13 @@ const America = ({ url }) => {
   return (
     <StatGrid>
       <StatBlock>
-        <p> Positive: </p> <span> {stats[0].positive} </span>
+        <p> Positive: </p> <span> {stats[0].positive.toLocaleString()} </span>
       </StatBlock>
       <RecoveredBlock>
-        <p> Tested: </p> <span> {stats[0].total} </span>
+        <p> Tested: </p> <span> {stats[0].total.toLocaleString()} </span>
       </RecoveredBlock>
       <DeathBlock>
-        <p> Deaths: </p> <span> {stats[0].death} </span>
+        <p> Deaths: </p> <span> {stats[0].death.toLocaleString()} </span>
       </DeathBlock>
     </StatGrid>
   );

@@ -19,7 +19,7 @@ const CountryBlock = ({ country }) => {
     <>
       <CountryCell>{country.country_name}</CountryCell>
       <CountryCell>{country.continent}</CountryCell>
-      <DataCell>{country.cases}</DataCell>
+      <DataCell>{country.cases.toLocaleString()}</DataCell>
       <NewCasesCell isOn={isOn(country.new_cases)}>
         {parseInt(country.new_cases) > 0 ? `+${country.new_cases}` : ""}
       </NewCasesCell>
@@ -28,10 +28,10 @@ const CountryBlock = ({ country }) => {
           ? `+${percentIncrease(country.new_cases.replace(/,/g, ""), country.cases.replace(/,/g, ""))}%`
           : ""}
       </IncreaseCell>
-      <DataCell>{country.deaths}</DataCell>
+      <DataCell>{country.deaths.toLocaleString()}</DataCell>
       <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell>
-      <DataCell>{country.total_recovered}</DataCell>
-      <DataCell>{country.serious_critical}</DataCell>
+      <DataCell>{country.total_recovered.toLocaleString()}</DataCell>
+      <DataCell>{country.serious_critical.toLocaleString()}</DataCell>
     </>
   );
 }
