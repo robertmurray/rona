@@ -42,7 +42,9 @@ const CountryBlock = ({ country }) => {
    if (error) return <p>Error...</p>;
    
   const getCountries = () => { 
-     return matchCountryToContinent(stats.countries_stat, countries).map((country, idx) => <CountryBlock key={ idx } country={ country } /> ); 
+     return matchCountryToContinent(stats.countries_stat, countries)
+       .sort((a, b) => (parseInt(a.cases.replace(/,/g, "")) < parseInt(b.cases.replace(/,/g, "")) ? 1 : -1))
+       .map((country, idx) => <CountryBlock key={idx} country={country} />); 
   }
   return (
     <CountryGrid>
