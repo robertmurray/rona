@@ -30,7 +30,10 @@ const patchCountries = () => {
     { country: "Sint Maarten", continent: "North America" }, 
     { country: "Fiji", continent: "Asia" },
     { country: "Isle of Man", continent: "Europe" }, 
-    { country: "Cabo Verde", continent: "Africa"}
+    { country: "Cabo Verde", continent: "Africa" }, 
+    { country: "Timor-Leste", continent: "Asia" }, 
+    { country: "Turks and Caicos", continent: "North America" },
+    { country: "Libya", continent: "Africa"}
   ];
 };
 
