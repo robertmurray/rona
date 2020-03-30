@@ -7,7 +7,7 @@ const patchCountries = () => {
     { country: "S. Korea", continent: "Asia" },
     { country: "USA", continent: "North America" },
     { country: "UK", continent: "Europe" },
-    { country: "Diamond Princess", continent: "International Conveyance" },
+    { country: "Diamond Princess", continent: "Intl Conveyance" },
     { country: "Czechia", continent: "Europe" },
     { country: "Russia", continent: "Asia" },
     { country: "UAE", continent: "Asia" },
@@ -33,7 +33,9 @@ const patchCountries = () => {
     { country: "Cabo Verde", continent: "Africa" }, 
     { country: "Timor-Leste", continent: "Asia" }, 
     { country: "Turks and Caicos", continent: "North America" },
-    { country: "Libya", continent: "Africa"}
+    { country: "Libya", continent: "Africa" },
+    { country: "British Virgin Islands", continent: "North America" },
+    { country: "MS Zaandam", continent: "Intl Conveyance"}
   ];
 };
 
