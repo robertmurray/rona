@@ -59,17 +59,17 @@ const StateBlock = ({ state }) => {
   return (
     <>
       <StateCell>{stateHash[state.state]}</StateCell>
-      <DataCell>{state.positive}</DataCell>
+      <DataCell>{state.positive.toLocaleString()}</DataCell>
       {/* <NewCasesCell isOn={isOn(country.new_cases)}>
         {parseInt(country.new_cases) > 0 ? `+${country.new_cases}` : ""}
       </NewCasesCell> */}
       {/* <IncreaseCell isOn={percentIncrease(country) >= 15}>
         {parseInt(country.new_cases) > 0 ? `+${percentIncrease(country)}%` : ""}
       </IncreaseCell> */}
-      <DeathCell>{state.death}</DeathCell>
+      <DeathCell>{state.death ? state.death.toLocaleString() : ""}</DeathCell>
       {/* <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell> */}
-      <DataCell>{state.pending}</DataCell>
-      <DataCell>{state.total}</DataCell>
+      <DataCell>{state.pending ? state.pending.toLocaleString() : ""}</DataCell>
+      <DataCell>{state.total.toLocaleString()}</DataCell>
     </>
   );
 };
