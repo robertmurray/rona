@@ -1,15 +1,12 @@
 import { useRouter } from "next/router";
-import GlobalStyle from "../styles/global";
+import GoogleFontLoader from 'react-google-font-loader';
 
 export default () => (
-  <>
-    <GlobalStyle />
-    <header>
-      <Link href="/">Home</Link>
-      <Link href="/countries">Countries</Link>
-      <Link href="/states">States</Link>
-    </header>
-  </>
+  <header>
+    <Link href="/">Home</Link>
+    <Link href="/countries">Countries</Link>
+    <Link href="/states">States</Link>
+  </header>
 );
 
 const Link = ({ children, href }) => {
@@ -19,9 +16,6 @@ const Link = ({ children, href }) => {
       href="#"
       onClick={e => {
         e.preventDefault();
-        // typically you want to use `next/link` for this usecase
-        // but this example shows how you can also access the router
-        // and use it manually
         router.push(href);
       }}
     >

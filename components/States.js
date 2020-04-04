@@ -5,7 +5,7 @@ import COLORS from "../styles/colors";
 
 const StateGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: 0.15rem;
 `;
 const HeaderBlock = styled.div`
@@ -59,7 +59,7 @@ const StateBlock = ({ state }) => {
   return (
     <>
       <StateCell>{stateHash[state.state]}</StateCell>
-      <DataCell>{state.positive.toLocaleString()}</DataCell>
+      <DataCell>{state.positive ? state.positive.toLocaleString() : ""}</DataCell>
       {/* <NewCasesCell isOn={isOn(country.new_cases)}>
         {parseInt(country.new_cases) > 0 ? `+${country.new_cases}` : ""}
       </NewCasesCell> */}
@@ -67,9 +67,10 @@ const StateBlock = ({ state }) => {
         {parseInt(country.new_cases) > 0 ? `+${percentIncrease(country)}%` : ""}
       </IncreaseCell> */}
       <DeathCell>{state.death ? state.death.toLocaleString() : ""}</DeathCell>
+      <DataCell>{state.hospitalized ? state.hospitalized.toLocaleString() : ""}</DataCell>
       {/* <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell> */}
       <DataCell>{state.pending ? state.pending.toLocaleString() : ""}</DataCell>
-      <DataCell>{state.total.toLocaleString()}</DataCell>
+      <DataCell>{state.totalTestResults.toLocaleString()}</DataCell>
     </>
   );
 };
@@ -88,6 +89,7 @@ const StateList = ({ url }) => {
       <HeaderBlock>State</HeaderBlock>
       <HeaderBlock>Positive</HeaderBlock>
       <HeaderBlock>Deaths</HeaderBlock>
+      <HeaderBlock>Hospitalized</HeaderBlock>
       <HeaderBlock>Pending Tests</HeaderBlock>
       <HeaderBlock>Total Tested</HeaderBlock>
       {getStates()}

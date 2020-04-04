@@ -24,14 +24,14 @@ const ContinentBlock = ({ continent }) => {
       <CountryCell>{continent.name}</CountryCell>
       <DataCell>{continent.cases.toLocaleString()}</DataCell>
       <NewCasesCell isOn={isOn(continent.new_cases)}>
-        {parseInt(continent.new_cases) > 0 ? `+${continent.new_cases}` : ""}
+        {parseInt(continent.new_cases) > 0 ? `+${continent.new_cases.toLocaleString()}` : ""}
       </NewCasesCell>
       <IncreaseCell isOn={percentIncrease(continent.new_cases, continent.cases) >= 15}>
         {parseInt(continent.new_cases) > 0 ? `+${percentIncrease(continent.new_cases, continent.cases)}%` : ""}
       </IncreaseCell>
       <DataCell>{continent.deaths.toLocaleString()}</DataCell>
       <DeathCell isOn={isOn(continent.new_deaths)}>
-        {continent.new_deaths > 0 ? `+${continent.new_deaths}` : ""}
+        {continent.new_deaths > 0 ? `+${continent.new_deaths.toLocaleString()}` : ""}
       </DeathCell>
       <DataCell>{continent.total_recovered.toLocaleString()}</DataCell>
       <DataCell>{continent.serious_critical.toLocaleString()}</DataCell>

@@ -3,7 +3,7 @@ import COLORS from "./colors";
 
 const GlobalStyle = createGlobalStyle`
   html {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Roboto', sans-serif;
 
   }
 
@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
 
   header { 
     padding: 20px 0px;
+  }
+
+  h1, h1, h3 { 
+    font-family: 'Roboto';
   }
 
   a:active, a:link, a:hover, a:visited { 

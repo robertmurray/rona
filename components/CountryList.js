@@ -29,7 +29,7 @@ const CountryBlock = ({ country }) => {
           : ""}
       </IncreaseCell>
       <DataCell>{country.deaths.toLocaleString()}</DataCell>
-      <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell>
+      <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths.replace(/,/g, "") > 0 ? `+${country.new_deaths}` : ""}</DeathCell>
       <DataCell>{country.total_recovered.toLocaleString()}</DataCell>
       <DataCell>{country.serious_critical.toLocaleString()}</DataCell>
     </>
