@@ -12,12 +12,14 @@
   "license": "ISC",
   "dependencies": {
     "country-json": "^1.1.0",
+    "dayjs": "^1.8.23",
     "next": "^9.3.0",
     "node-fetch": "^2.6.0",
     "normalize.css": "^8.0.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-google-font-loader": "^1.1.0",
+    "recharts": "^1.8.5",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {

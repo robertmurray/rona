@@ -4,7 +4,6 @@ import COLORS from "./colors";
 const GlobalStyle = createGlobalStyle`
   html {
     font-family: 'Roboto', sans-serif;
-
   }
 
   body { 
@@ -16,14 +15,16 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover; 
     color: ${COLORS.offwhite}; 
     padding-bottom: 40px; 
+    font-family: 'Roboto', sans-serif;
   }
 
   header { 
     padding: 20px 0px;
   }
 
-  h1, h1, h3 { 
-    font-family: 'Roboto';
+  h1, h2, h3, h4, h5, h6 { 
+    font-family: 'Roboto', sans-serif;
+    margin: 10px;
   }
 
   a:active, a:link, a:hover, a:visited { 

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import useStats, { basicOptions } from "../utils/useStats";
 
-
 import HeaderBlock from "../components/base/HeaderBlock";
 import ContinentGrid from "../components/base/ContinentGrid";
   
@@ -11,6 +10,8 @@ import patchedCountries from "../utils/patchCountries";
 import matchCountryToContinent from "../utils/matchCountryToContinent";
 import sumByContinent from "../utils/sumByContinent"; 
 import percentIncrease from "../utils/percentIncrease"; 
+
+import { COUNTRIES_URL } from "../lib/urls"; 
 
 
 import { DataCell, IncreaseCell, NewCasesCell, DeathCell, CountryCell } from "../components/base/DataCell";
@@ -39,9 +40,24 @@ const ContinentBlock = ({ continent }) => {
   );
 };
 
+const ContinentHeader = () => { 
+  return (
+    <>
+      <HeaderBlock>Continent</HeaderBlock>
+      <HeaderBlock>Cases</HeaderBlock>
+      <HeaderBlock>New Cases</HeaderBlock>
+      <HeaderBlock>Increase</HeaderBlock>
+      <HeaderBlock>Deaths</HeaderBlock>
+      <HeaderBlock>New Deaths</HeaderBlock>
+      <HeaderBlock>Recovered</HeaderBlock>
+      <HeaderBlock>Serious</HeaderBlock>
+    </>
+  );
+}
 
-const Continents = ({ url }) => {
-  const { stats, loading, error } = useStats(url, basicOptions);
+
+const Continents = () => {
+  const { stats, loading, error } = useStats(COUNTRIES_URL, basicOptions);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
 
@@ -53,14 +69,7 @@ const Continents = ({ url }) => {
 
   return (
     <ContinentGrid>
-      <HeaderBlock>Continent</HeaderBlock>
-      <HeaderBlock>Cases</HeaderBlock>
-      <HeaderBlock>New Cases</HeaderBlock>
-      <HeaderBlock>Increase</HeaderBlock>
-      <HeaderBlock>Deaths</HeaderBlock>
-      <HeaderBlock>New Deaths</HeaderBlock>
-      <HeaderBlock>Recovered</HeaderBlock>
-      <HeaderBlock>Serious</HeaderBlock>
+      <ContinentHeader />
       {getContinents()}
     </ContinentGrid>
   );

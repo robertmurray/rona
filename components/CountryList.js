@@ -11,6 +11,8 @@ import CountryGrid from "../components/base/CountryGrid";
 import HeaderBlock from "../components/base/HeaderBlock";
 import { DataCell, IncreaseCell, NewCasesCell, DeathCell, CountryCell } from "../components/base/DataCell";
 
+import { COUNTRIES_URL } from "../lib/urls"; 
+
 const countries = patchedCountries(); 
 
 const CountryBlock = ({ country }) => { 
@@ -36,8 +38,8 @@ const CountryBlock = ({ country }) => {
   );
 }
 
- const CountryList = ({ url })  => {
-   const { stats, loading, error } = useStats(url, basicOptions);
+ const CountryList = ()  => {
+   const { stats, loading, error } = useStats(COUNTRIES_URL, basicOptions);
    if (loading) return <p>Loading...</p>
    if (error) return <p>Error...</p>;
    

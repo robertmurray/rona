@@ -2,49 +2,11 @@ import styled from "styled-components";
 import useStats from "../utils/useStats";
 import COLORS from "../styles/colors";
 
-const StatGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
-`;
-const StatBlock = styled.div`
-  background: ${COLORS.gray};
-  background: linear-gradient(
-    140deg,
-    ${COLORS.gray} 0%,
-    ${COLORS.mediumgray} 65%
-  );
-  color: ${COLORS.darkteal};
-  font-size: 2rem;
-  padding: 1rem;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  text-align: center;
-`;
+import { StatGrid, StatBlock, DeathBlock, RecoveredBlock } from "../components/base/Stats"; 
 
-const DeathBlock = styled(StatBlock)`
-  background-color: ${COLORS.burgundy};
-  background-image: linear-gradient(
-    135deg,
-    ${COLORS.burgundy} 0%,
-    ${COLORS.mediumburgundy} 65%
-  );
-  color: ${COLORS.mediumgray};
-`;
-
-const RecoveredBlock = styled(StatBlock)`
-  background-color: ${COLORS.mediumteal};
-  background-image: linear-gradient(
-    135deg,
-    ${COLORS.mediumteal} 0%,
-    ${COLORS.teal} 65%
-  );
-  color: ${COLORS.offwhite};
-`;
-
-const America = ({ url }) => {
-  const { stats, loading, error } = useStats(url);
+import { US_URL } from "../lib/urls"; 
+const America = () => {
+  const { stats, loading, error } = useStats(US_URL);
   if (loading) return <p> Loading... </p>;
   if (error) return <p> Error... </p>;
 
@@ -59,14 +21,17 @@ const America = ({ url }) => {
   return (
     <StatGrid>
       <StatBlock>
-        <p> Positive: </p> <span> {stats[0].positive.toLocaleString()} </span>
+        <h5>Positive:</h5>
+        <span>{stats[0].positive.toLocaleString()} </span>
       </StatBlock>
       <RecoveredBlock>
-        <p> Tested: </p> <span> {stats[0].total.toLocaleString()} </span>
+        <h5>Tested:</h5>
+        <span>{stats[0].total.toLocaleString()}</span>
       </RecoveredBlock>
       <DeathBlock>
-        <p> Deaths: </p> <span> {stats[0].death.toLocaleString()} </span>
-      </DeathBlock>
+        <h5>Deaths:</h5>
+        <span>{stats[0].death.toLocaleString()}</span>
+     </DeathBlock>  
     </StatGrid>
   );
 };

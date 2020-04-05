@@ -30,3 +30,8 @@ export const IncreaseCell = styled(DataCell)`
   background: ${props => (props.isOn ? COLORS.burgundy : COLORS.darkteal)};
   color: ${COLORS.mediumgray};
 `;
+
+
+export const StateCell = styled(DataCell)`
+  justify-items: left;
+`;
