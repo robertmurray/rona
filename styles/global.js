@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 { 
     font-family: 'Roboto', sans-serif;
-    margin: 10px 10px 10px 0px; 
+    margin: 30px 10px 10px 0px; 
   }
 
   a:active, a:link, a:hover, a:visited { 
