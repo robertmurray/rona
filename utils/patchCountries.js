@@ -26,17 +26,18 @@ const patchCountries = () => {
     { country: "Faeroe Islands", continent: "South America" },
     { country: "Eswatini", continent: "Africa" },
     { country: "St. Barth", continent: "North America" },
-    { country: "Montenegro", continent: "Europe" }, 
-    { country: "Sint Maarten", continent: "North America" }, 
+    { country: "Montenegro", continent: "Europe" },
+    { country: "Sint Maarten", continent: "North America" },
     { country: "Fiji", continent: "Asia" },
-    { country: "Isle of Man", continent: "Europe" }, 
-    { country: "Cabo Verde", continent: "Africa" }, 
-    { country: "Timor-Leste", continent: "Asia" }, 
+    { country: "Isle of Man", continent: "Europe" },
+    { country: "Cabo Verde", continent: "Africa" },
+    { country: "Timor-Leste", continent: "Asia" },
     { country: "Turks and Caicos", continent: "North America" },
     { country: "Libya", continent: "Africa" },
     { country: "British Virgin Islands", continent: "North America" },
-    { country: "MS Zaandam", continent: "Intl Conveyance" }, 
-    { country: "Caribbean Netherlands", continent: "North America" }
+    { country: "MS Zaandam", continent: "Intl Conveyance" },
+    { country: "Caribbean Netherlands", continent: "North America" },
+    { country: "Saint Pierre Miquelon", continent: "North America" },
   ];
 };
 
