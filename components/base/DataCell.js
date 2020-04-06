@@ -23,7 +23,7 @@ export const DeathCell = styled(DataCell)`
 
 export const NewCasesCell = styled(DataCell)`
   background: ${props => (props.isOn ? COLORS.mediumgray : COLORS.darkteal)};
-  color: ${COLORS.darkteal};
+  color: ${props => (props.isOn ? COLORS.darkteal : COLORS.mediumgray)};
 `;
 
 export const IncreaseCell = styled(DataCell)`

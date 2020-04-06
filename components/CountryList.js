@@ -17,21 +17,36 @@ const countries = patchedCountries();
 
 const CountryBlock = ({ country }) => { 
   const isOn = (newItems) => parseInt(newItems) > 0; 
+  const isDeathRateHigh = () => { 
+    return percentIncrease(country.deaths.replace(/,/g, ""), country.cases.replace(/,/g, "")) > 4;
+  }
+
+  const isIncreaseHigh = () =>
+    percentIncrease(country.new_cases.replace(/,/g, ""), country.cases.replace(/,/g, "")) >= 15;
+  
   return (
     <>
       <CountryCell>{country.country_name}</CountryCell>
       <CountryCell>{country.continent}</CountryCell>
-      <DataCell>{country.cases.toLocaleString()}</DataCell>
+      {/* <DataCell>{country.cases.toLocaleString()}</DataCell> */}
       <NewCasesCell isOn={isOn(country.new_cases)}>
-        {parseInt(country.new_cases) > 0 ? `+${country.new_cases}` : ""}
+        {country.cases.toLocaleString()}
+        {parseInt(country.new_cases) > 0 ? `  (+${country.new_cases})` : ""}
       </NewCasesCell>
-      <IncreaseCell isOn={percentIncrease(country.new_cases.replace(/,/g, ""), country.cases.replace(/,/g, "")) >= 15}>
+      {/* <IncreaseCell isOn={isIncreaseHigh()}>
         {parseInt(country.new_cases) > 0
           ? `+${percentIncrease(country.new_cases.replace(/,/g, ""), country.cases.replace(/,/g, ""))}%`
           : ""}
-      </IncreaseCell>
-      <DataCell>{country.deaths.toLocaleString()}</DataCell>
-      <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths.replace(/,/g, "") > 0 ? `+${country.new_deaths}` : ""}</DeathCell>
+      </IncreaseCell> */}
+      <DeathCell isOn={isDeathRateHigh()}>
+        {country.deaths.toLocaleString()}
+        {" ("}
+        {percentIncrease(country.deaths.replace(/,/g, ""), country.cases.replace(/,/g, ""))}
+        {"%)"}
+      </DeathCell>
+      <DeathCell isOn={isOn(country.new_deaths)}>
+        {country.new_deaths.replace(/,/g, "") > 0 ? `+${country.new_deaths}` : ""}
+      </DeathCell>
       <DataCell>{country.total_recovered.toLocaleString()}</DataCell>
       <DataCell>{country.serious_critical.toLocaleString()}</DataCell>
     </>
@@ -57,12 +72,9 @@ const CountryBlock = ({ country }) => {
       <HeaderBlock>
         Cases
       </HeaderBlock>
-      <HeaderBlock>
-        New Cases
-      </HeaderBlock>
-      <HeaderBlock>
+      {/* <HeaderBlock>
         Increase
-      </HeaderBlock>
+      </HeaderBlock> */}
       <HeaderBlock>
         Deaths
       </HeaderBlock>
