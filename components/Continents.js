@@ -14,7 +14,17 @@ import percentIncrease from "../utils/percentIncrease";
 import { COUNTRIES_URL } from "../lib/urls"; 
 
 
-import { DataCell, IncreaseCell, NewCasesCell, DeathCell, CountryCell } from "../components/base/DataCell";
+import {
+  DataCell,
+  IncreaseCell,
+  NewCasesCell,
+  DeathCell,
+  CountryCell,
+  DeathSpan,
+  PercentSpan,
+  DataSpan,
+  IncreaseSpan,
+} from "../components/base/DataCell";
 
 const countries = patchedCountries();
 
@@ -23,17 +33,21 @@ const ContinentBlock = ({ continent }) => {
   return (
     <>
       <CountryCell>{continent.name}</CountryCell>
-      <DataCell>{continent.cases.toLocaleString()}</DataCell>
-      <NewCasesCell isOn={isOn(continent.new_cases)}>
-        {parseInt(continent.new_cases) > 0 ? `+${continent.new_cases.toLocaleString()}` : ""}
-      </NewCasesCell>
-      <IncreaseCell isOn={percentIncrease(continent.new_cases, continent.cases) >= 15}>
-        {parseInt(continent.new_cases) > 0 ? `+${percentIncrease(continent.new_cases, continent.cases)}%` : ""}
-      </IncreaseCell>
-      <DataCell>{continent.deaths.toLocaleString()}</DataCell>
-      <DeathCell isOn={isOn(continent.new_deaths)}>
-        {continent.new_deaths > 0 ? `+${continent.new_deaths.toLocaleString()}` : ""}
-      </DeathCell>
+      <DataCell>
+        <DataSpan isOn={true}>
+          {parseInt(continent.new_cases) > 0 ? `+${continent.new_cases.toLocaleString()}` : ""}
+        </DataSpan>
+        {parseInt(continent.new_cases) > 0 ? (
+          <IncreaseSpan isOn={true}>+{percentIncrease(continent.new_cases, continent.cases)}%</IncreaseSpan>
+        ) : (
+          ""
+        )}
+        {continent.cases.toLocaleString()}
+      </DataCell>
+      <DataCell>
+        {continent.new_deaths > 0 ? <DeathSpan isOn={true}>+{continent.new_deaths.toLocaleString()}</DeathSpan> : ""}
+        {continent.deaths.toLocaleString()}
+      </DataCell>
       <DataCell>{continent.total_recovered.toLocaleString()}</DataCell>
       <DataCell>{continent.serious_critical.toLocaleString()}</DataCell>
     </>
@@ -45,10 +59,7 @@ const ContinentHeader = () => {
     <>
       <HeaderBlock>Continent</HeaderBlock>
       <HeaderBlock>Cases</HeaderBlock>
-      <HeaderBlock>New Cases</HeaderBlock>
-      <HeaderBlock>Increase</HeaderBlock>
       <HeaderBlock>Deaths</HeaderBlock>
-      <HeaderBlock>New Deaths</HeaderBlock>
       <HeaderBlock>Recovered</HeaderBlock>
       <HeaderBlock>Serious</HeaderBlock>
     </>

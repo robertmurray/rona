@@ -8,7 +8,7 @@ import percentIncrease from "../utils/percentIncrease";
 import HeaderBlock from "../components/base/HeaderBlock";
 import StateGrid from "../components/base/StateGrid"; 
 
-import { DataCell, IncreaseCell, NewCasesCell, DeathCell, StateCell } from "../components/base/DataCell";
+import { DataCell, IncreaseCell, NewCasesCell, DeathCell, StateCell, DeathSpan } from "../components/base/DataCell";
 
 import { US_STATES_URL } from "../lib/urls"; 
 
@@ -30,7 +30,7 @@ const StateBlock = ({ state }) => {
       {/* <IncreaseCell isOn={percentIncrease(country) >= 15}>
         {parseInt(country.new_cases) > 0 ? `+${percentIncrease(country)}%` : ""}
       </IncreaseCell> */}
-      <DeathCell>{state.death ? state.death.toLocaleString() : ""}</DeathCell>
+      <DeathCell>{state.death ? <DeathSpan isOn={true}>{state.death.toLocaleString()}</DeathSpan> : ""}</DeathCell>
       <DataCell>{state.hospitalized ? state.hospitalized.toLocaleString() : ""}</DataCell>
       {/* <DeathCell isOn={isOn(country.new_deaths)}>{country.new_deaths > 0 ? `+${country.new_deaths}` : ""}</DeathCell> */}
       <DataCell>{state.pending ? state.pending.toLocaleString() : ""}</DataCell>

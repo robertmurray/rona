@@ -4,7 +4,7 @@ import COLORS from "../../styles/colors";
 const StateGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-gap: 0.15rem;
+  grid-gap: 0rem;
 `;
 
 export const StateDetailVerticalGrid  = styled.div`
