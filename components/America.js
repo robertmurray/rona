@@ -6,9 +6,11 @@ import { StatGrid, StatBlock, DeathBlock, RecoveredBlock } from "../components/b
 
 import { US_URL } from "../lib/urls"; 
 const America = () => {
-  const { stats, loading, error } = useStats(US_URL);
+  const { stats, loading, error } = useStats("/api/america");
   if (loading) return <p> Loading... </p>;
   if (error) return <p> Error... </p>;
+
+  console.log("stats: ", stats);
 
   const getPercentRecovered = () => {
     return Math.floor(
