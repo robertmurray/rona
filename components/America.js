@@ -24,15 +24,15 @@ const America = () => {
     <StatGrid>
       <StatBlock>
         <h5>Positive:</h5>
-        <span>{stats[0].positive.toLocaleString()} </span>
+        <span>{stats.positive.toLocaleString()} </span>
       </StatBlock>
       <RecoveredBlock>
         <h5>Tested:</h5>
-        <span>{stats[0].total.toLocaleString()}</span>
+        <span>{stats.total.toLocaleString()}</span>
       </RecoveredBlock>
       <DeathBlock>
         <h5>Deaths:</h5>
-        <span>{stats[0].death.toLocaleString()}</span>
+        <span>{stats.death.toLocaleString()}</span>
      </DeathBlock>  
     </StatGrid>
   );
