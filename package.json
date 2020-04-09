@@ -13,7 +13,10 @@
   "dependencies": {
     "axios": "^0.19.2",
     "country-json": "^1.1.0",
+    "csvtojson": "^2.0.10",
     "dayjs": "^1.8.23",
+    "dotenv": "^8.2.0",
+    "faunadb": "^2.13.1",
     "next": "^9.3.0",
     "node-fetch": "^2.6.0",
     "normalize.css": "^8.0.1",
@@ -21,7 +24,8 @@
     "react-dom": "^16.13.0",
     "react-google-font-loader": "^1.1.0",
     "recharts": "^1.8.5",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.31",
