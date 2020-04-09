@@ -1,10 +1,9 @@
 import axios from "axios"; 
-import { US_STATES_URL } from "../../lib/urls"; 
+import { US_URL } from "../../lib/urls"; 
 
 async function handler(req, res) {
   const response = await axios.get(US_URL); 
-  console.log("data: ", ...response.data); 
-  res.json({ ...response.data });
+  return res.json(response.data[0]);
 }
 
 export default handler;
