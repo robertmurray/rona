@@ -105,10 +105,16 @@ const StateDeathComposedChart = ({ data }) => {
     >
       <XAxis dataKey="date" tick={<CustomizedAxisTick />} />
       <YAxis tick={<CustomizedYAxisTick />} />
-      <Tooltip content={<CustomTooltip />}/>
+      <Tooltip content={<CustomTooltip />} />
       <Legend />
       <CartesianGrid stroke={COLORS.mediumgray} />
-      {/* <Area type="monotone" dataKey="death" name="total deaths" stroke={COLORS.mediumburgundy} fill={COLORS.burgundy} /> */}
+      <Area
+        type="monotone"
+        dataKey="deathThreeDayAverage"
+        name="three day average"
+        stroke={COLORS.mediumburgundy}
+        fill={COLORS.burgundy}
+      />
       <Bar dataKey="deathIncrease" name="Deaths" barSize={10} fill={COLORS.pink} />
     </ComposedChart>
   );
@@ -132,10 +138,60 @@ const StatePositiveComposedChart = ({ data }) => {
       <Tooltip content={<CustomTooltip />} />
       <Legend />
       <CartesianGrid stroke={COLORS.mediumgray} />
-      {/* <Area type="monotone" dataKey="positive" name="total cases" stroke={COLORS.gray} fill={COLORS.mediumgray} /> */}
+      <Area
+        type="monotone"
+        dataKey="casesThreeDayAverage"
+        name="three day average"
+        stroke={COLORS.gray}
+        fill={COLORS.mediumgray}
+      />{" "}
+      */}
       <Bar dataKey="positiveIncrease" name="Cases" barSize={10} fill={COLORS.teal} />
     </ComposedChart>
   );
+}
+
+const addThreeDayAverages = (data) => { 
+  // let outputData = []; 
+  for (let i = 0; i < data.length; i++) {
+    // three day average for deaths
+    let day0DeathIncrease =
+      data[i - 1] !== undefined
+        ? data[i - 1].deathIncrease !== (null || undefined)
+          ? data[i - 1].deathIncrease
+          : 0
+        : 0;
+
+    let day1DeathIncrease =
+      data[i].deathIncrease !== null ? data[i].deathIncrease : 0;
+    let day2DeathIncrease =
+      data[i + 1] !== undefined
+        ? data[i + 1].deathIncrease !== (null || undefined)
+          ? data[i + 1].deathIncrease
+          : 0
+        : 0;
+    data[i].deathThreeDayAverage = Math.floor(
+      (day0DeathIncrease + day1DeathIncrease + day2DeathIncrease) / 3
+    );
+
+    // three day average for deaths
+    let day0CasesIncrease =
+      data[i - 1] !== undefined
+        ? data[i - 1].positiveIncrease !== (null || undefined)
+          ? data[i - 1].positiveIncrease
+          : 0
+        : 0;
+
+    let day1CasesIncrease = data[i].positiveIncrease !== null ? data[i].positiveIncrease : 0;
+    let day2CasesIncrease =
+      data[i + 1] !== undefined
+        ? data[i + 1].positiveIncrease !== (null || undefined)
+          ? data[i + 1].positiveIncrease
+          : 0
+        : 0;
+    data[i].casesThreeDayAverage = Math.floor((day0CasesIncrease + day1CasesIncrease + day2CasesIncrease) / 3);
+  }
+  return data; 
 }
 
 const StateDetail = ({ id }) => {
@@ -144,7 +200,10 @@ const StateDetail = ({ id }) => {
   if (error) return <p>Error...</p>;
 
   const latestData = stats[0];
-  const sortedData = stats.sort((a, b) => (a.date > b.date ? 1 : -1));
+  const sortedData = addThreeDayAverages(stats.sort((a, b) => (a.date > b.date ? 1 : -1)));
+
+  console.log(sortedData[29])
+
 
   return (
     <>
