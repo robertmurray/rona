@@ -5,16 +5,21 @@ import COLORS from "../../styles/colors";
 
 const StateTotalsPie = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const RADIAN = Math.PI / 180;
+  const [innerActiveIndex, setInnerActiveIndex] = useState(-1);
 
   const onPieEnter = (data, index) => {
     setActiveIndex(index);
+    setInnerActiveIndex(-1);
+  };
+
+  const onInnerPieEnter = (data, index) => {
+    setActiveIndex(-1);
+    setInnerActiveIndex(index);
   };
   const renderActiveShape = (props) => {
     const {
       cx,
       cy,
-      midAngle,
       innerRadius,
       outerRadius,
       startAngle,
@@ -23,20 +28,13 @@ const StateTotalsPie = ({ data }) => {
       payload,
       value,
     } = props;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-    const ey = my;
-    const textAnchor = cos >= 0 ? "start" : "end";
-
     return (
       <g>
-        <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+        <text x={cx} y={cy} dy={0} textAnchor="middle" fill={COLORS.offwhite}>
           {payload.name}
+        </text>
+        <text x={cx} y={cy} dy={18} textAnchor="middle" fill={COLORS.offwhite}>
+          {`${value.toLocaleString()}`}
         </text>
         <Sector
           cx={cx}
@@ -56,27 +54,6 @@ const StateTotalsPie = ({ data }) => {
           outerRadius={outerRadius + 20}
           fill={fill}
         />
-        <path
-          d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-          stroke={fill}
-          fill="none"
-        />
-        <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-        <text
-          x={ex + (cos >= 0 ? 1 : -1) * 12}
-          y={ey}
-          textAnchor={textAnchor}
-          fill={payload.color}
-        >{`${payload.name}`}</text>
-        <text
-          x={ex + (cos >= 0 ? 1 : -1) * 12}
-          y={ey}
-          dy={18}
-          textAnchor={textAnchor}
-          fill={payload.color}
-        >
-          {`${value.toLocaleString()}`}
-        </text>
       </g>
     );
   };
@@ -106,12 +83,17 @@ const StateTotalsPie = ({ data }) => {
   return (
     <PieChart width={800} height={800}>
       <Pie
+        activeIndex={innerActiveIndex}
         data={innerPieData}
         dataKey="value"
         cx={350}
         cy={400}
         innerRadius={100}
         outerRadius={150}
+        onMouseOver={onInnerPieEnter}
+        activeShape={renderActiveShape}
+        startAngle={90}
+        endAngle={450}
         fill={COLORS.gray}
       >
         {innerPieData.map((entry, index) => (
@@ -129,6 +111,8 @@ const StateTotalsPie = ({ data }) => {
         fill={COLORS.mediumgray}
         activeShape={renderActiveShape}
         onMouseEnter={onPieEnter}
+        startAngle={90}
+        endAngle={450}
         dataKey="value"
       >
         {pieData.map((entry, index) => (

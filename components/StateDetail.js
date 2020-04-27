@@ -73,6 +73,7 @@ const StateDetail = ({ id }) => {
           <StateTotalsPie data={latestData} />
         </>
         <div>
+          <h3>Totals</h3>
           <StateTotals data={sortedData} />
           <h3>New Cases</h3>
           <StatePositiveComposed data={sortedData} />

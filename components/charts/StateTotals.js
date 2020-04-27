@@ -1,12 +1,4 @@
-import {
-  Area,
-  AreaChart,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { Area, AreaChart, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 import {
   CustomTooltip,
@@ -28,7 +20,6 @@ const StateTotals = ({ data }) => {
         bottom: 5,
       }}
     >
-      <CartesianGrid stroke={COLORS.mediumgray} />
       <XAxis
         dataKey="date"
         fontFamily={"Roboto, sans-serif"}

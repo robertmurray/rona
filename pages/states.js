@@ -1,13 +1,13 @@
 import States from "../components/States";
 import Header from "../components/Header";
-const USStates = () => { 
+const USStates = () => {
   return (
     <>
-      <Header/>
+      <Header />
       <h2>US States</h2>
-      <States/>
+      <States />
     </>
-  )
-}
+  );
+};
 
-export default USStates; 
+export default USStates;

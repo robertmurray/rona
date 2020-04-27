@@ -4,7 +4,6 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
 } from "recharts";
@@ -33,7 +32,6 @@ const StatePositiveComposed = ({ data }) => {
       <YAxis tick={<CustomizedYAxisTick />} />
       <Tooltip content={<CustomTooltip />} />
       <Legend />
-      <CartesianGrid stroke={COLORS.mediumgray} />
       <Area
         type="monotone"
         dataKey="casesThreeDayAverage"
