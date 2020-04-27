@@ -11,7 +11,7 @@ const HeaderBlock = styled.div`
   justify-items: center;
   text-align: center;
   font-weight: bold;
-  border-bottom: 1px solid ${COLORS.gray}
+  border-bottom: 1px solid ${COLORS.gray};
 `;
 
-export default HeaderBlock; 
+export default HeaderBlock;
